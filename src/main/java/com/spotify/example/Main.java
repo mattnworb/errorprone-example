@@ -7,6 +7,14 @@ public final class Main {
   public static void main(final String... args) {
     System.out.println("hello!");
 
+    final String[] x = new String[] {"one"};
+    final String[] y = new String[] {"two"};
+    if (x.equals(y)) {
+      System.out.println("arrays are equal!");
+    }
+
+    new Exception();
+
     System.out.println("goodbye!");
   }
 }
