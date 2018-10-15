@@ -12,6 +12,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- controlled by the version of errorprone we use -->
+    <javac.version>9+181-r4173-1</javac.version>
   </properties>
 
   <build>
