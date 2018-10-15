@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <name>errorprone-example-java11</name>
+  <name>error-prone-example-java11</name>
 
   <groupId>com.spotify</groupId>
-  <artifactId>errorprone-example</artifactId>
+  <artifactId>error-prone-example</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
@@ -15,14 +15,6 @@
   </properties>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>1.5.0.Final</version>
-      </extension>
-    </extensions>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -43,20 +35,6 @@
             </path>
           </annotationProcessorPaths>
         </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.coveo</groupId>
-        <artifactId>fmt-maven-plugin</artifactId>
-        <!-- use in conjunction with https://plugins.jetbrains.com/plugin/8527-google-java-format -->
-        <version>2.5.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>format</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
