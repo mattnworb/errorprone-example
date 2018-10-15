@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>errorprone-example-java11</name>
+
+  <groupId>com.spotify</groupId>
+  <artifactId>errorprone-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.5.0.Final</version>
+      </extension>
+    </extensions>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+          <compilerArgs>
+            <arg>-XDcompilePolicy=simple</arg>
+            <arg>-Xplugin:ErrorProne</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>com.google.errorprone</groupId>
+              <artifactId>error_prone_core</artifactId>
+              <version>2.3.2</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <!-- use in conjunction with https://plugins.jetbrains.com/plugin/8527-google-java-format -->
+        <version>2.5.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- using github.com/google/error-prone-javac is required when running on JDK 8 -->
+  <profiles>
+    <profile>
+      <id>jdk8</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <fork>true</fork>
+              <compilerArgs combine.children="append">
+                <arg>
+                  -J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar
+                </arg>
+              </compilerArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
